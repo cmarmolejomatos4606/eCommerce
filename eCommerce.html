@@ -1,0 +1,128 @@
+<!doctype HTML>
+<html>
+	<head>
+		<title>eCommerce</title>
+		<style>
+			h1{
+				text-align: center;
+				font-family: Times;
+				color: white
+			}
+
+			body{
+		 background-color: red;
+		 margin:auto;
+			}
+			#name1{
+            text-transform: uppercase;
+            font-size:30px;
+			color: white;
+			}
+
+			#name2{
+            text-transform: uppercase;
+            font-size: 30px;
+			color: white;
+    		}
+			#name3{
+            text-transform: uppercase;
+            font-size: 30px;
+			color: white;
+			}
+	#div1{
+            width: 32%;
+            height: 700px;
+            border: solid;
+            display: inline-block;
+			color: black;
+        }
+		</style>
+		<script>
+			var p1 = 12, wp1 = 11;
+			var p2 = 15, wp2 = 14;
+			var p3 = 9, wp3 = 8;
+			var taxrate = 8.75;
+
+			function initPrices(){
+				var q1 = document.getElementById("quantity1").value;
+				var q2 = document.getElementById("quantity2").value;
+				var q3 = document.getElementById("quantity3").value;
+				var op1 = document.getElementById("span1");
+				var op2 = document.getElementById("span2");
+				var op3 = document.getElementById("span3");
+				op1.innerHTML = "Price: $" +p1;
+				op2.innerHTML = "Price: $" +p2;
+				op3.innerHTML = "Price: $" +p3;
+			}
+
+			function Receipt(){
+				var q1 = parseFloat(document.getElementById("quantity1").value);
+				var q2 = parseFloat(document.getElementById("quantity2").value);
+				var q3 = parseFloat(document.getElementById("quantity3").value);
+				var op = document.getElementById("custsub");
+				var custs = (p1*q1)+(p2*q2)+(p3*q3);
+				var comps = (wp1*q1)+(wp2*q2)+(wp3*q3);
+				var profit = custs-comps;
+				var itemss = q1+q2+q3;
+				var tax = custs*taxrate/100;
+				var shipping = 0;
+				if(custs<100 && itemss>0){
+					shipping = 25;
+				}else if(custs>=100 && custs<200){
+					shipping = 10;
+				}else{
+					shipping = 0
+				}
+				
+				var custt = custs + tax + shipping;
+
+                        var build = "";
+                        build +="<pre> ";
+                        build += "*Customer Info* <br>";
+                        build += "_____________________<br>"
+                        build += "Subtotal: $" + custs + "<br>";
+                        build += "Tax: $" + tax + "<br>";
+                        build += "Shipping: $" + shipping + " <br>";
+                        build += "Total: $" + custt + "<br>";
+                        build += "\n"
+                        build += " *Company Info* <br>";
+                        build += "_____________________ <br>";
+                        build += " Customer Subtotal: $" + custs + "<br> ";
+                        build += "Company Subtotal: $" + comps + "<br> ";
+                        build += "Profit: $" + profit + "<br> ";
+                        build += "Total Items Sold: " + itemss + "<br> ";
+                        op.innerHTML = build; 
+			}
+		</script>
+	</head>
+	<body onload="initPrices()">
+		<h1>Extremely Cheap Video Game Consoles</h1>
+		<div id = "div1">
+			<p id ="name1">Xbox One X</p><br>
+			<img src="xbox_one_x.jpg"><br>
+			<p id ="desc1"><pre>Microsoft's newest console with enhanced graphics 
+for an extremely low price of $12! This Console is special because we
+have sold more xbox ones than any other console.</pre></p><br>
+			<span id="span1"></span>
+			<input type="text" id="quantity1" placeholder="Enter Amount">
+		</div>
+		<br>
+		<div>
+			<p id ="name2">Plyastation 4 Pro</p><br>
+			<img src="ps4_pro.png"><br>
+			<p id ="desc2"><pre>Sony's Playstation 4 Pro now reduced to a price of only $15!</pre></p><br>
+			<span id="span2"></span>
+			<input type="text" id="quantity2" placeholder="Enter Amount">
+		</div>
+		<div>
+			<p id ="name3">Nintendo Switch</p><br>
+			<img src="switch.jpg"><br>
+			<p id ="desc3"><pre>Experience gameplay at home or on the go
+with Nintendo's most recent console for only $9!</pre></p><br>
+			<span id="span3"></span>
+			<input type="text" id="quantity3" placeholder="Enter Amount">
+		</div>
+		<button onclick = "Receipt()">Process Order</button>
+		<span id = "custsub"></span>
+	</body>
+</html>
